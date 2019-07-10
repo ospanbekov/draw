@@ -48,6 +48,10 @@
                 font-size: 84px;
             }
 
+            .description {
+                font-size: 34px;
+            }
+
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -80,7 +84,15 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md"></div>
+                <div class="title m-b-md">
+                    Prize drawing web application
+                </div>
+
+                <p class="description">
+                    After authentication, you can get a random prize.
+                    <br>
+                    Types of prizes: money, bonus points, physical object.
+                </p>
             </div>
         </div>
     </body>
