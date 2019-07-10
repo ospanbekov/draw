@@ -64,11 +64,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        /* Bonus account creation for the new user */
+        $user->bonus()->save(factory(User\Account\Bonus::class)->make());
+
+        return $user;
     }
 }
