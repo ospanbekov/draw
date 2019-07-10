@@ -18,3 +18,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/draw', 'DrawController@index')->name('draw');
+Route::get('/list', 'DrawController@list')->name('list');
