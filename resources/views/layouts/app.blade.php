@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="@guest{{ url('/') }}@else{{ url('/draw') }}@endguest">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -49,6 +49,16 @@
                                 </li>
                             @endif
                         @else
+                            <!-- Bonus account amount -->
+                            <li class="nav-item">
+                                <a class="nav-link pr-3" href="#">{{ __('Bonus points') }}: <strong>{{ Auth::user()->bonus->amount }}</strong></a>
+                            </li>
+
+                            <!-- Prize draws -->
+                            <li class="nav-item">
+                                <a class="nav-link pr-3" href="{{ route('list') }}">{{ __('My prize draws') }}</a>
+                            </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->lastname }} {{ Auth::user()->firstname }} <span class="caret"></span>
