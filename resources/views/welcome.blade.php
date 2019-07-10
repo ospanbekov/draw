@@ -89,9 +89,9 @@
                 </div>
 
                 <p class="description">
-                    After authentication, you can get a random prize.
+                    After authentication, you can get a random prize
                     <br>
-                    Types of prizes: money, bonus points, physical object.
+                    Types of prizes: money, bonus points, physical object
                 </p>
             </div>
         </div>
