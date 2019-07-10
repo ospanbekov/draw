@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DrawController extends Controller
 {
@@ -23,6 +24,13 @@ class DrawController extends Controller
      */
     public function index()
     {
-        return view('draw');
+        return view('draw.index');
+    }
+
+    public function list()
+    {
+        $draws = Auth::user()->draws;
+
+        return view('draw.list');
     }
 }
