@@ -16,9 +16,14 @@ class CreateDrawsTable extends Migration
         Schema::create('draws', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('item_id')->unsigned()->nullable();
+            $table->smallInteger('type');
+            $table->float('amount')->nullable();
+            $table->smallInteger('status')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('item_id')->references('id')->on('items');
         });
     }
 
