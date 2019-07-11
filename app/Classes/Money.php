@@ -82,6 +82,6 @@ class Money implements Prize
      */
     public function isAvailable(): bool
     {
-        return !empty(Account::first()->amount);
+        return !empty(Account::history()->get()->getAmount());
     }
 }

@@ -14,4 +14,14 @@ class Item extends Model
     protected $fillable = [
         'name', 'image', 'quantity'
     ];
+
+    /**
+     * Get the draw owns the item.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function draw()
+    {
+        return $this->belongsTo(Draw::class);
+    }
 }
