@@ -138,6 +138,10 @@
                     .post('/api/draw.json')
                     .then((response) => {
                         this.draw = response.draw
+                        /* show result in modal */
+                        this.$refs.ResultModalComponent.open()
+                        /* refresh list */
+                        this.fetchDrawList()
                     })
             },
 
@@ -146,10 +150,6 @@
                     .get('/api/draws.json')
                     .then((response) => {
                         this.draws = response.data.draws
-                        /* show result in modal */
-                        this.$refs.ResultModalComponent.open()
-                        /* refresh list */
-                        this.fetchDrawList()
                     })
             },
 
@@ -177,9 +177,9 @@
                     })
             },
 
-            acceptLastDraw () {
+            rejectLastDraw () {
                 axios
-                    .post('/api/draw/accept.json')
+                    .post('/api/draw/reject.json')
                     .then((response) => {
                         /* refresh list */
                         this.fetchDrawList()
@@ -188,9 +188,9 @@
                     })
             },
 
-            rejectLastDraw () {
+            acceptLastDraw () {
                 axios
-                    .post('/api/draw/reject.json')
+                    .post('/api/draw/accept.json')
                     .then((response) => {
                         /* refresh list */
                         this.fetchDrawList()
