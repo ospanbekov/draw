@@ -37,6 +37,14 @@ class Bonus implements Prize
     }
 
     /**
+     * @return float
+     */
+    public function getAmount(): ?float
+    {
+        return $this->bonus;
+    }
+
+    /**
      * @return int|null
      */
     public function getIdentifierValue(): ?int

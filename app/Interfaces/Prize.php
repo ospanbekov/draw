@@ -15,6 +15,11 @@ interface Prize
     public function getName(): string;
 
     /**
+     * @return float
+     */
+    public function getAmount(): ?float;
+
+    /**
      * @return int|null
      */
     public function getIdentifierValue(): ?int;

@@ -37,6 +37,14 @@ class Item implements Prize
     }
 
     /**
+     * @return float
+     */
+    public function getAmount(): ?float
+    {
+        return $this->item->amount; // maybe item can have price?
+    }
+
+    /**
      * @return int|null
      */
     public function getIdentifierValue(): ?int

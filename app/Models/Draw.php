@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums;
 use App\Interfaces\Prize;
 use App\Models\Abstracts\AbstractModel;
 use Illuminate\Contracts\Support\Arrayable;
@@ -46,9 +47,12 @@ class Draw extends AbstractModel implements Arrayable
      */
     public static function factory(User $user, Prize $prize)
     {
-        return new self([
-            'user_id' => $user->id,
-            'type' => $prize->getName()
+        /* create new draw with undefined status */
+        return self::create([
+            'status'  => Enums\DrawStatus::UNDEFINED,
+            'type'    => $prize->getKey(),
+            'amount'  => $prize->getAmount(),
+            'item_id' => $prize->getIdentifierValue()
         ]);
     }
 

@@ -38,6 +38,14 @@ class Money implements Prize
     }
 
     /**
+     * @return float
+     */
+    public function getAmount(): ?float
+    {
+        return $this->money;
+    }
+
+    /**
      * @return int|null
      */
     public function getIdentifierValue(): ?int
