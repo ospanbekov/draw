@@ -73,7 +73,7 @@
         text-align center
 
     .prize-action
-        margin-top 20px
+        margin-top 30px
 
         display flex
         flex-direction row
@@ -170,7 +170,10 @@
                 axios
                     .post('/api/draw/exchange.json')
                     .then((response) => {
-
+                        /* refresh list */
+                        this.fetchDrawList()
+                        /* close modal */
+                        this.$refs.ResultModalComponent.close()
                     })
             },
 
@@ -178,15 +181,21 @@
                 axios
                     .post('/api/draw/accept.json')
                     .then((response) => {
-
-                        })
+                        /* refresh list */
+                        this.fetchDrawList()
+                        /* close modal */
+                        this.$refs.ResultModalComponent.close()
+                    })
             },
 
             rejectLastDraw () {
                 axios
                     .post('/api/draw/reject.json')
                     .then((response) => {
-
+                        /* refresh list */
+                        this.fetchDrawList()
+                        /* close modal */
+                        this.$refs.ResultModalComponent.close()
                     })
             }
         }
