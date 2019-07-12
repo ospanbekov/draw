@@ -7,9 +7,13 @@ use Illuminate\Contracts\Support\Arrayable;
 
 class AccessToken extends AbstractModel implements Arrayable
 {
-    public $timestamps = false;
     protected $table = 'access_tokens';
-    protected $fillable = ['user_id', 'access_token', 'revoked', 'created_at', 'expired_at'];
+
+    protected $fillable = [
+        'user_id',
+        'access_token',
+        'created_at',
+        'expired_at'];
 
     /**
      * Create simple object
@@ -25,7 +29,6 @@ class AccessToken extends AbstractModel implements Arrayable
             'user_id' => $user->id,
             'access_token' => self::generateToken($user, $user->group),
             'refresh_token' => NULL,
-            'revoked' => 0,
             'created_at' => date('Y-m-d H:i:s', time()),
             'expired_at' => $expired
         ]);
@@ -42,16 +45,6 @@ class AccessToken extends AbstractModel implements Arrayable
         return self::where(array_merge($credentials, [
             'access_token' => $token
         ]))->first();
-    }
-
-    /**
-     * Revoke token
-     *
-     * @return void
-     */
-    public function revokeToken()
-    {
-        $this->revoked = true;
     }
 
     /**
@@ -83,7 +76,6 @@ class AccessToken extends AbstractModel implements Arrayable
             'id' => (int)$this->id,
             'user_id' => (int)$this->user_id,
             'access_token' => $this->access_token,
-            'revoked' => $this->isRevoked(),
             'created_at' => $this->created_at,
             'expired_at' => $this->expired_at
         ];

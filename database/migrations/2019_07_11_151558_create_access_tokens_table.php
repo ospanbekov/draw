@@ -17,7 +17,6 @@ class CreateAccessTokensTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->text('access_token');
-            $table->boolean('revoked')->default(0)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
