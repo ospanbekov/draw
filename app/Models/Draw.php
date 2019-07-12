@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums;
+use App\Enums\DrawStatus;
 use App\Interfaces\Prize;
 use App\Models\Abstracts\AbstractModel;
 use Illuminate\Contracts\Support\Arrayable;
@@ -15,7 +15,7 @@ class Draw extends AbstractModel implements Arrayable
      * @var array
      */
     protected $fillable = [
-        'user_id', 'item_id', 'type', 'amount'
+        'user_id', 'item_id', 'type', 'amount', 'status'
     ];
 
     /**
@@ -49,7 +49,7 @@ class Draw extends AbstractModel implements Arrayable
     {
         /* create new draw with undefined status */
         return self::create([
-            'status'  => Enums\DrawStatus::UNDEFINED,
+            'status'  => DrawStatus::UNDEFINED,
             'type'    => $prize->getKey(),
             'amount'  => $prize->getAmount(),
             'item_id' => $prize->getIdentifierValue(),
