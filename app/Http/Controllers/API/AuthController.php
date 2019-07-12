@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
+use App\Models;
+use App\Http\States;
+use App\Http\Response\APIResponse;
+
 use App\Exceptions as AppException;
+
+use Hash;
+use Validator;
 
 class AuthController extends BaseController
 {
     /**
      * Auth method
      *
-     * @param  Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function auth(Request $request)
     {
@@ -19,33 +28,31 @@ class AuthController extends BaseController
                 'email' => 'required|email',
                 'password' => 'required|min:6|max:20'
             ]);
-             if ($validator->fails()) {
-                 throw new ValidatorException($validator);
-             }
+
+            if ($validator->fails()) {
+                throw new AppException\ValidatorException($validator);
+            }
 
             /* get user by phone number */
-            $user = Model\User::where(
-                $request->only('phone', 'email')
+            $user = Models\User::where(
+                $request->only('email')
             )->firstOrFail();
-             /* check status client */
-            if ($user->status === Enum\UserStatus::ENEW) {
-                return APIResponse::error($request, [
-                    'exception' => States\Authenticate::USER_IS_DISABLED_TEXT
-                ], States\Authenticate::USER_IS_DISABLED_CODE);
-            }
-             /* check password */
+
+            /* check password */
             if (!Hash::check($request->input('password'), $user->password)) {
                 return APIResponse::error($request, [
                     'exception' => States\Authenticate::WRONG_PASSWORD_TEXT
                 ], States\Authenticate::WRONG_PASSWORD_CODE);
             }
-             /* */
-            $token = Model\AccessToken::factory($user, NULL);
-             return APIResponse::success($request, [
-                 'user' => $user,
-                 'access_token' => $token->access_token
-             ]);
-        } catch (ValidatorException $e) {
+
+            /* */
+            $token = Models\AccessToken::factory($user, NULL);
+
+            return APIResponse::success($request, [
+                'user' => $user,
+                'access_token' => $token->access_token
+            ]);
+        } catch (AppException\ValidatorException $e) {
             return APIResponse::error($request, $e->getValidator()->errors()->messages(), States\Validation::VALIDATION_ERROR_CODE);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return APIResponse::error($request, ['exception' => States\Authenticate::USER_NOT_FOUND_TEXT], States\Authenticate::USER_NOT_FOUND_CODE);
