@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Abstracts\AbstractModel;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Str;
 
 class AccessToken extends AbstractModel implements Arrayable
 {
@@ -27,7 +28,7 @@ class AccessToken extends AbstractModel implements Arrayable
     {
         return self::create([
             'user_id' => $user->id,
-            'access_token' => self::generateToken($user, $user->group),
+            'access_token' => Str::random(64),
             'refresh_token' => NULL,
             'created_at' => date('Y-m-d H:i:s', time()),
             'expired_at' => $expired
