@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['namespace' => 'API'], function () {
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('/draw.json', 'DrawController@draw');
+        Route::post('/exchange/{draw}.json', 'DrawController@exchange');
+    });
 });
