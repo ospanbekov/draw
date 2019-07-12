@@ -18,7 +18,8 @@ Route::group(['namespace' => 'API'], function () {
     Route::post('/logout.json', 'AuthController@logout');
 
     Route::group(['middleware' => 'auth'], function () {
+        Route::get('/draws.json', 'DrawController@list');
         Route::post('/draw.json', 'DrawController@draw');
-        Route::post('/exchange/{draw}.json', 'DrawController@exchange');
+        Route::post('/draw/exchange/{draw}.json', 'DrawController@exchange');
     });
 });
