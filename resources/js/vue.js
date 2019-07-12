@@ -22,6 +22,10 @@ new Vue({
         })
     },
 
+    created () {
+
+    },
+
     mounted () {
         if (!this.isLoggedIn) {
             this.$refs.LoginComponent.show()

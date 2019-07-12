@@ -7,12 +7,14 @@ export default {
     namespaced: true,
 
     state: {
+        accessToken: localStorage.getItem('access_token'),
         isLoggedIn: false
     },
 
     mutations: {
         [LOGIN_SUCCESS](state) {
-            state.isLoggedIn = true
+            state.isLoggedIn  = true
+            state.accessToken = accessToken
         },
 
         [LOGOUT](state) {
@@ -31,7 +33,7 @@ export default {
                         throw Error()
                     }
 
-                    commit(LOGIN_SUCCESS)
+                    commit(LOGIN_SUCCESS, data.token.access_token)
                     /* remember token */
                     localStorage.setItem('access_token', data.token.access_token)
                 })
@@ -47,6 +49,10 @@ export default {
     getters: {
         isLoggedIn: state => {
             return state.isLoggedIn
+        },
+
+        accessToken: state => {
+            return state.accessToken
         }
     }
 }
