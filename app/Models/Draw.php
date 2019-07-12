@@ -4,8 +4,9 @@ namespace App\Models;
 
 use App\Interfaces\Prize;
 use App\Models\Abstracts\AbstractModel;
+use Illuminate\Contracts\Support\Arrayable;
 
-class Draw extends AbstractModel
+class Draw extends AbstractModel implements Arrayable
 {
     /**
      * The attributes that are mass assignable.
@@ -49,5 +50,21 @@ class Draw extends AbstractModel
             'user_id' => $user->id,
             'type' => $prize->getName()
         ]);
+    }
+
+    /**
+     * Convert model to array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'item_id' => $this->item_id,
+            'type' => $this->type,
+            'amount' => $this->amount
+        ];
     }
 }
