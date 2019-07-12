@@ -40,40 +40,4 @@ class DrawController extends Controller
 
         return view('draw.list', compact('draws'));
     }
-
-    /**
-     * Only XMLHttpRequest, POST method. Draw action
-     *
-     * @param  Request $request
-     * @return array(JSON)
-     */
-    public function draw(Request $request)
-    {
-        /* instance PrizeGenerator */
-        $generator = new Classes\PrizeGenerator([
-            Classes\Bonus::class,
-            Classes\Money::class,
-            Classes\Item::class
-        ]);
-
-        /* get random available prize */
-        do {
-            $prize = $generator->randomize();
-        } while ($prize->isAvailable());
-        /* create draw item */
-        $draw = Models\Draw::factory(Auth::user(), $prize);
-
-        return [
-            'draw' => $draw
-        ];
-    }
-
-    /**
-     * @param Request $request
-     * @param Models\Draw $draw
-     */
-    public function exchange(Request $request, Models\Draw $draw)
-    {
-
-    }
 }
