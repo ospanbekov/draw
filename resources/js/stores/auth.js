@@ -12,7 +12,7 @@ export default {
     },
 
     mutations: {
-        [LOGIN_SUCCESS](state) {
+        [LOGIN_SUCCESS](state, accessToken) {
             state.isLoggedIn  = true
             state.accessToken = accessToken
         },
@@ -29,7 +29,7 @@ export default {
                 .then((response) => {
                     let data = response.data
 
-                    if (data.access_token == undefined) {
+                    if (data.access_token === undefined) {
                         throw Error()
                     }
 
