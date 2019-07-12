@@ -19,7 +19,7 @@ class DrawController extends BaseController
     public function list(Request $request)
     {
         return [
-            'draws' => Models\Draw::where('user_id', Auth::user()->id)->get()
+            'draws' => Auth::user()->draws
         ];
     }
 

@@ -58,16 +58,6 @@ class AccessToken extends AbstractModel implements Arrayable
     }
 
     /**
-     * Check is token revoked
-     *
-     * @return boolean
-     */
-    public function isRevoked()
-    {
-        return (bool)$this->revoked;
-    }
-
-    /**
      * @return array
      */
     public function toArray()
