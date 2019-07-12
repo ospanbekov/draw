@@ -39,64 +39,9 @@ class AccessToken extends AbstractModel implements Arrayable
      */
     public static function checkToken($token, array $credentials = [])
     {
-        if ($data = self::extractToken($token)) {
-            return self::where(array_merge($credentials, [
-                'user_id' => $data['user_id'],
-                'guard_type' => $data['guard']
-            ]))->first();
-        }
-        return NULL;
-    }
-
-    /**
-     * Verify token
-     *
-     * @return boolean
-     */
-    public static function verifyToken($token)
-    {
-        $arr = explode('.', base64_decode($token));
-        if (!is_array($arr) || sizeof($arr) < 4) {
-            return false;
-        }
-        if (md5($arr[0] . $arr[1] . env('APP_KEY')) !== $arr[2]) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Extract data from token string
-     *
-     * @return array
-     */
-    public static function extractToken($token)
-    {
-        if (!self::verifyToken($token)) {
-            return false;
-        }
-        /* */
-        $data = explode('.', base64_decode($token));
-        return [
-            'user_id' => $data[0],
-            'guard' => $data[1],
-            'signature' => $data[2],
-            'random' => $data[3]
-        ];
-    }
-
-    /**
-     * Generate new token
-     *
-     * @return String
-     */
-    protected static function generateToken(User $user, $guard)
-    {
-        return base64_encode(
-            implode('.', [
-                $user->id, $guard, md5($user->id . $guard . env('APP_KEY')), uniqid()
-            ])
-        );
+        return self::where(array_merge($credentials, [
+            'access_token' => $token
+        ]))->first();
     }
 
     /**
