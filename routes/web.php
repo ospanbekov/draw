@@ -12,10 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('app');
 });
-
-Auth::routes();
-
-Route::get('/draw', 'DrawController@index')->name('draw');
-Route::get('/list', 'DrawController@list')->name('list');

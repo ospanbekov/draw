@@ -14,6 +14,9 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['namespace' => 'API'], function () {
+    Route::post('/auth.json', 'AuthController@auth')->middleware('guest');
+    Route::post('/logout.json', 'AuthController@logout');
+
     Route::group(['middleware' => 'auth'], function () {
         Route::post('/draw.json', 'DrawController@draw');
         Route::post('/exchange/{draw}.json', 'DrawController@exchange');
