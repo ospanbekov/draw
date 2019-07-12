@@ -29,7 +29,6 @@ class AccessToken extends AbstractModel implements Arrayable
         return self::create([
             'user_id' => $user->id,
             'access_token' => Str::random(64),
-            'refresh_token' => NULL,
             'created_at' => date('Y-m-d H:i:s', time()),
             'expired_at' => $expired
         ]);
