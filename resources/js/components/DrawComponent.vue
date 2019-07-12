@@ -9,16 +9,33 @@
                 <div class="draw-item" v-for="draw in draws">
                     <div class="draw-name">Игра №{{ draw.id }}</div>
                     <div class="draw-prize">
-                        <span v-if="draw.type == 0">Money - {{ draw.amount }}</span>
-                        <span v-if="draw.type == 1">Bonus - {{ draw.amount }}</span>
-                        <span v-if="draw.type == 2">Item - {{ draw.type }}</span>
+                        <span v-if="draw.type == 0">Деньги - {{ draw.amount }}</span>
+                        <span v-if="draw.type == 1">Бонус - {{ draw.amount }}</span>
+                        <span v-if="draw.type == 2">Предмет - {{ draw.item.name }}</span>
+                    </div>
+                    <div class="draw-status">
+                        <span v-if="draw.status == 0">Игрок отказался от приза</span>
+                        <span v-if="draw.status == 1">Игрок принял приз</span>
+                        <span v-if="draw.status == 2">Игрок обменял приз</span>
+                        <span v-if="draw.status == 9">Не определено</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <modal-component ref="ResultModalComponent" title="Результат игры">
-
+            <div class="draw-modal-prize">
+                <div class="prize-name">
+                    <span v-if="draw.type == 0">Деньги - {{ draw.amount }}</span>
+                    <span v-if="draw.type == 1">Бонус - {{ draw.amount }}</span>
+                    <span v-if="draw.type == 2">Предмет - {{ draw.item.name }}</span>
+                </div>
+                <div class="prize-action">
+                    <button type="button" @click.prevent="acceptLastDraw()">Принять</button>
+                    <button type="button" @click.prevent="rejectLastDraw()">Отказаться</button>
+                    <button type="button" @click.prevent="exchangeLastDraw()">Обменять</button>
+                </div>
+            </div>
         </modal-component>
     </div>
 </template>
@@ -46,6 +63,30 @@
 
     .draw-game
         text-align center
+
+    .draw-modal-prize
+        padding 30px 0px
+
+    .prize-name
+        font-size 1.1rem
+        font-weight bold
+        text-align center
+
+    .prize-action
+        margin-top 20px
+
+        display flex
+        flex-direction row
+        justify-content space-between
+        align-items center
+            button
+                cursor pointer
+                color #666
+                font-size 1rem
+                padding 10px 15px
+                border solid 2px #EEE
+                border-radius 3px
+
 
     .draw-button
         cursor pointer
@@ -87,7 +128,8 @@
         },
 
         mounted () {
-            this.fetchCurrentDraw()
+            this.fetchDrawList(),
+            this.fetchLastDraw()
         },
 
         methods: {
@@ -111,12 +153,33 @@
                     })
             },
 
+            fetchLastDraw () {
+                axios
+                    .get('/api/draw.json')
+                    .then((response) => {
+                        this.draw = response.data.draw
+
+                        /* if last draw is isset, show result modal */
+                        if (this.draw.id) {
+                            this.$refs.ResultModalComponent.open()
+                        }
+                    })
+            },
+
             exchangeLastDraw () {
                 axios
                     .post('/api/draw/exchange.json')
                     .then((response) => {
 
                     })
+            },
+
+            acceptLastDraw () {
+                axios
+                    .post('/api/draw/accept.json')
+                    .then((response) => {
+
+                        })
             },
 
             rejectLastDraw () {

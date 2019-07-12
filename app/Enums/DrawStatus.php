@@ -8,5 +8,6 @@ final class DrawStatus extends Enum
 {
     const REJECTED = 0;
     const ACCEPTED = 1;
+    const EXCHANGED = 2;
     const UNDEFINED = 9;
 }

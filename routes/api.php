@@ -19,8 +19,10 @@ Route::group(['namespace' => 'API'], function () {
 
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/draws.json', 'DrawController@list');
+        Route::get('/draw.json', 'DrawController@last');
         Route::post('/draw.json', 'DrawController@draw');
         Route::post('/draw/reject.json', 'DrawController@cancel');
         Route::post('/draw/exchange.json', 'DrawController@exchange');
+        Route::post('/draw/accept.json', 'DrawController@accept');
     });
 });

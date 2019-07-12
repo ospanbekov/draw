@@ -31,11 +31,11 @@ class Draw extends AbstractModel implements Arrayable
     /**
      * Get the item record associated with the draw.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function item()
     {
-        return $this->hasOne(Item::class);
+        return $this->belongsTo(Item::class);
     }
 
     /**
@@ -67,8 +67,10 @@ class Draw extends AbstractModel implements Arrayable
             'id' => $this->id,
             'user_id' => $this->user_id,
             'item_id' => $this->item_id,
+            'status'  => $this->status,
             'type' => $this->type,
-            'amount' => $this->amount
+            'amount'  => $this->amount,
+            'item'    => $this->item
         ];
     }
 }
