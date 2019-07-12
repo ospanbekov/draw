@@ -11,6 +11,19 @@ use Auth;
 class DrawController extends BaseController
 {
     /**
+     * GET method. Draw lists
+     *
+     * @param  Request $request
+     * @return array(JSON)
+     */
+    public function list(Request $request)
+    {
+        return [
+            'draws' => Models\Draw::where('user_id', Auth::user()->id)->get()
+        ];
+    }
+
+    /**
      * POST method. Draw action
      *
      * @param  Request $request
