@@ -112,7 +112,7 @@ class AccessToken extends AbstractModel implements Arrayable
     /**
      * Get User of current token
      *
-     * @return belongsTo relationship class or Device model if using as variable
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {

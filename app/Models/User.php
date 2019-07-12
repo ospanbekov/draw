@@ -42,6 +42,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * User tokens for any operations which require confirmation. Ex: Change Password
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function accessTokens()
+    {
+        return $this->hasMany(AccessToken::class);
+    }
+
+    /**
      * Get the bank account record associated with the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
