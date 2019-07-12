@@ -33,9 +33,9 @@ export default {
                         throw Error()
                     }
 
-                    commit(LOGIN_SUCCESS, data.token.access_token)
+                    commit(LOGIN_SUCCESS, data.access_token)
                     /* remember token */
-                    localStorage.setItem('access_token', data.token.access_token)
+                    localStorage.setItem('access_token', data.access_token)
                 })
         },
 
@@ -48,7 +48,7 @@ export default {
 
     getters: {
         isLoggedIn: state => {
-            return state.isLoggedIn
+            return state.isLoggedIn || state.accessToken // TODO: make check auth method ...
         },
 
         accessToken: state => {

@@ -14,11 +14,27 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style charset="utf-8">
+        html,
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            font-size: 90%;
+            font-weight: 400;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
     <div id="App">
         <login-component ref="LoginComponent" v-if="!isLoggedIn"></login-component>
+        <draw-component ref="DrawComponent" v-if="isLoggedIn"></draw-component>
     </div>
 
     <!-- Scripts -->
