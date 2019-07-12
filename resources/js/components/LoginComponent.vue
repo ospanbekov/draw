@@ -23,57 +23,65 @@
     * Form
     */
     .auth-form
-    .auth-form-item
-    margin-top 18px
-         &:first-child
-                 margin-top 0px
-                             label
-                             color #333
-                             font-weight 600
-    font-size 0.92rem
-                  display block
-                  margin-bottom 10px
-                                  .auth-form-action
-                                  display flex
-                                  flex-wrap nowrap
-                                  flex-direction row
-                                  justify-content flex-start
-                                  align-items center
-                                  span.error
-                                  color red
-                                  font-size 0.8rem
-                                               line-height 15px
-                                                             margin-top 10px
-                                                                          display block
-                                                                          input
-                                                                          font-size 0.9rem
-                                                                                       width 100%
-    display block
-    padding-top 14px
-                  padding-bottom 14px
-                                   padding-left 15px
-                                                  padding-right 15px
-                                                                  border solid 2px #CCC
-                                                                                border-radius 3px
-                                                                                               box-shadow none
-                                                                                               input
-        &::-webkit-input-placeholder
-                                                                                               color #AAA
-    &::-moz-placeholder
-     color #AAA
-    &:-ms-input-placeholder
-     color #AAA
-    &:-moz-placeholder
-     color #AAA
-     button::-moz-focus-inner
-     padding 0
-    border 0
+        .auth-form-item
+            margin-top 18px
+
+            &:first-child
+                margin-top 0px
+
+        label
+            color #333
+            font-weight 600
+            font-size 0.92rem
+            display block
+            margin-bottom 10px
+
+        .auth-form-action
+            display flex
+            flex-wrap nowrap
+            flex-direction row
+            justify-content flex-start
+            align-items center
+
+        span.error
+            color red
+            font-size 0.8rem
+            line-height 15px
+            margin-top 10px
+            display block
+
+        input
+            font-size 0.9rem
+            width 100%
+            display block
+            padding-top 14px
+            padding-bottom 14px
+            padding-left 15px
+            padding-right 15px
+            border solid 2px #CCC
+            border-radius 3px
+            box-shadow none
+
+        input
+            &::-webkit-input-placeholder
+                color #AAA
+            &::-moz-placeholder
+                color #AAA
+            &:-ms-input-placeholder
+                color #AAA
+            &:-moz-placeholder
+                color #AAA
+
+        button::-moz-focus-inner
+                   padding 0
+                   border 0
+
     .auth-button
-    color #FFF
-    border none
-    border-radius 3px
-                   padding 10px 14px
-                                  background-color #0277bd
+        color #FFF
+        border none
+        border-radius 3px
+        padding 10px 14px
+        background-color #0277bd
 </style>
 
 <script>
