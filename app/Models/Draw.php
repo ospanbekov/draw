@@ -52,7 +52,8 @@ class Draw extends AbstractModel implements Arrayable
             'status'  => Enums\DrawStatus::UNDEFINED,
             'type'    => $prize->getKey(),
             'amount'  => $prize->getAmount(),
-            'item_id' => $prize->getIdentifierValue()
+            'item_id' => $prize->getIdentifierValue(),
+            'user_id' => $user->id
         ]);
     }
 
